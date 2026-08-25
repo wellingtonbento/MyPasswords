@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyPasswords.Data;
+using MyPasswords.Repositories;
+using MyPasswords.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ var serverVersion = new MySqlServerVersion(new Version(8, 0, 40));
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, serverVersion, mySqlOptions =>
         mySqlOptions.EnableRetryOnFailure(maxRetryCount: 3)));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();
 
 var app = builder.Build();
 
