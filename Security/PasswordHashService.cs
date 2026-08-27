@@ -1,4 +1,4 @@
-﻿namespace MyPasswords.Services
+﻿namespace MyPasswords.Security
 {
     public class PasswordHashService
     {
