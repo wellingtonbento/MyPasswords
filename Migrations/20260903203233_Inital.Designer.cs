@@ -12,8 +12,8 @@ using MyPasswords.Data;
 namespace MyPasswords.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260821010455_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260903203233_Inital")]
+    partial class Inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,13 +70,13 @@ namespace MyPasswords.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
