@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MyPasswords.Data;
 using MyPasswords.Handlers;
 using MyPasswords.Repositories;
 using MyPasswords.Repositories.Interfaces;
+using MyPasswords.Security;
+using MyPasswords.Services.Account;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,22 +24,35 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();
+builder.Services.AddScoped<PasswordHashService>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/Login";
+    });
 
 var app = builder.Build();
+app.UseExceptionHandler();
 
 if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
 }
 
-app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

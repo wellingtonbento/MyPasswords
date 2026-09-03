@@ -12,7 +12,7 @@ namespace MyPasswords.Handlers
             _logger = logger;
         }
 
-        public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+        public ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
             _logger.LogError(exception, "Exceção não tratada em {Method} {Path}",
             httpContext.Request.Method, httpContext.Request.Path);
@@ -20,10 +20,10 @@ namespace MyPasswords.Handlers
             var redirectUrl = exception switch
             {
                 EmailAlreadyExistsException =>
-                    $"/Auth/Register?error={Uri.EscapeDataString(exception.Message)}",
+                    $"/Account/Register?error={Uri.EscapeDataString(exception.Message)}",
 
                 InvalidCredentialsException =>
-                    $"/Auth/Login?error={Uri.EscapeDataString(exception.Message)}",
+                    $"/Account/Login?error={Uri.EscapeDataString(exception.Message)}",
 
                 NotFoundException =>
                     $"/Home/Error?message={Uri.EscapeDataString(exception.Message)}",
@@ -32,7 +32,7 @@ namespace MyPasswords.Handlers
             };
 
             httpContext.Response.Redirect(redirectUrl);
-            return await ValueTask.FromResult(true);
+            return ValueTask.FromResult(true);
         }
     }
 }
