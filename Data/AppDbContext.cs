@@ -19,7 +19,7 @@ namespace MyPasswords.Data
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(u => u.Id);
-                entity.Property(u => u.UserName).IsRequired().HasColumnType("varchar(50)");
+                entity.Property(u => u.Name).IsRequired().HasColumnType("varchar(50)");
                 entity.Property(u => u.Email).IsRequired().HasColumnType("varchar(100)");
                 entity.Property(u => u.Password).IsRequired().HasColumnType("varchar(255)");
 

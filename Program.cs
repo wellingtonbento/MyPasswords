@@ -6,6 +6,7 @@ using MyPasswords.Repositories;
 using MyPasswords.Repositories.Interfaces;
 using MyPasswords.Security;
 using MyPasswords.Services.Account;
+using MyPasswords.Services.Register;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,12 +27,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IRegisterServices, RegisterService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();
-builder.Services.AddScoped<PasswordHashService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

@@ -5,15 +5,13 @@ using MyPasswords.Security;
 
 namespace MyPasswords.Services.Account
 {
-    public class AccountService : IAccountService
+    public class LoginService : ILoginService
     {
         private readonly IUserRepository _userRepository;
-        private readonly PasswordHashService _passwordHashService;
 
-        public AccountService(IUserRepository userRepository, PasswordHashService passwordHashService)
+        public LoginService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _passwordHashService = passwordHashService;
         }
 
         public async Task<LoginDTO?> Login(LoginViewModel model)
@@ -21,13 +19,13 @@ namespace MyPasswords.Services.Account
             var user = await _userRepository.GetByEmail(model.Email);
             if (user is null) return null;
 
-            if(!_passwordHashService.VerifyPassword(model.Password, user.Password))
+            if(!PasswordHashService.VerifyPassword(model.Password, user.Password))
                 return null;
 
             return new LoginDTO
             {
                 Id = user.Id,
-                UserName = user.UserName,
+                UserName = user.Name,
                 Email = user.Email
             };
         }

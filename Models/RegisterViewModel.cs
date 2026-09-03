@@ -5,7 +5,7 @@ namespace MyPasswords.Models
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "User name is required.")]
-        public string UserName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
