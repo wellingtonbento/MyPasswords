@@ -5,11 +5,11 @@ using MyPasswords.Security;
 
 namespace MyPasswords.Services.User.Login
 {
-    public class LoginService : ILoginService
+    public class LoginUserServices : ILoginUserServices
     {
         private readonly IUserRepository _userRepository;
 
-        public LoginService(IUserRepository userRepository)
+        public LoginUserServices(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

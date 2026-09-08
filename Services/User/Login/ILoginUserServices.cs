@@ -3,7 +3,7 @@ using MyPasswords.Models;
 
 namespace MyPasswords.Services.User.Login
 {
-    public interface ILoginService
+    public interface ILoginUserServices
     {
         Task<LoginDTO?> Login(LoginViewModel model);
     }
