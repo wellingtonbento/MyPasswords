@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyPasswords.Models;
 using MyPasswords.Repositories.Interfaces;
 using MyPasswords.Services.ObtainUserLogged;
+using MyPasswords.Services.User.Delete;
 using MyPasswords.Services.User.Login;
 using MyPasswords.Services.User.Register;
 using MyPasswords.Services.User.Update;
@@ -92,6 +93,26 @@ namespace MyPasswords.Controllers
                 ModelState.AddModelError(string.Empty, "Could not update the user");
                 return View(model);
             }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Delete() => View();
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete([FromServices] IDeleteService deleteService)
+        {
+            var isDeleted = await deleteService.Delete();
+            if (!isDeleted)
+            {
+                ModelState.AddModelError(string.Empty, "Could not delete the user");
+                return View();
+            }
+
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
 
