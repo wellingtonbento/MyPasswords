@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete account</h1>
+<p class="text-danger">This action is permanent. Your account will be removed.</p>
+
+<form asp-action="Delete" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <button type="submit" class="btn btn-danger">Delete my account</button>
+    <a asp-action="Update" class="btn btn-secondary">Cancel</a>
+</form>
