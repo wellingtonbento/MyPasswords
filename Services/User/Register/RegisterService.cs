@@ -4,7 +4,7 @@ using MyPasswords.Models.Entities;
 using MyPasswords.Repositories.Interfaces;
 using MyPasswords.Security;
 
-namespace MyPasswords.Services.Register
+namespace MyPasswords.Services.User.Register
 {
     public class RegisterService : IRegisterServices
     {
@@ -22,7 +22,7 @@ namespace MyPasswords.Services.Register
             if (await _userRepository.ExistUserWithEmail(model.Email))
                 return false;
 
-            var user = _mapper.Map<User>(model);
+            var user = _mapper.Map<Models.Entities.User>(model);
             user.Password = PasswordHashService.HashPassword(model.Password);
 
 

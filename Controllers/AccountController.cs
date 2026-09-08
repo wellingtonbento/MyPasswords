@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPasswords.Models;
-using MyPasswords.Services.Account;
-using MyPasswords.Services.Register;
+using MyPasswords.Repositories.Interfaces;
+using MyPasswords.Services.ObtainUserLogged;
+using MyPasswords.Services.User.Login;
+using MyPasswords.Services.User.Register;
+using MyPasswords.Services.User.Update;
 using System.Security.Claims;
 
 namespace MyPasswords.Controllers
@@ -30,7 +34,7 @@ namespace MyPasswords.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, loggedUser.Id.ToString()),
-                new Claim(ClaimTypes.Name, loggedUser.UserName)
+                new Claim(ClaimTypes.Name, loggedUser.Name)
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -62,6 +66,33 @@ namespace MyPasswords.Controllers
                 return View(model);
             }
             return RedirectToAction("Login");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Update([FromServices] ILoggedUser loggedUser,
+                                      [FromServices] IUserRepository userRepository)
+        {
+            var user = await userRepository.GetById(loggedUser.Id);
+            if (user is null) return RedirectToAction("Login");
+
+            return View(new UserEditViewModel { Name = user.Name });
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(UserEditViewModel model, [FromServices] IUpdateServices updateServices)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var isUpdated = await updateServices.Update(model);
+            if (!isUpdated)
+            {
+                ModelState.AddModelError(string.Empty, "Could not update the user");
+                return View(model);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
     }
