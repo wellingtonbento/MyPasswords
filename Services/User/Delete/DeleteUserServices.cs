@@ -3,12 +3,12 @@ using MyPasswords.Services.ObtainUserLogged;
 
 namespace MyPasswords.Services.User.Delete
 {
-    public class DeleteService : IDeleteService
+    public class DeleteUserServices : IDeleteUserServices
     {
         private readonly IUserRepository _userRepository;
         private readonly ILoggedUser _loggedUser;
 
-        public DeleteService(IUserRepository userRepository, ILoggedUser loggedUser)
+        public DeleteUserServices(IUserRepository userRepository, ILoggedUser loggedUser)
         {
             _userRepository = userRepository;
             _loggedUser = loggedUser;

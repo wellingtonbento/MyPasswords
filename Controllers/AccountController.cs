@@ -20,7 +20,7 @@ namespace MyPasswords.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, [FromServices] ILoginService loginService)
+        public async Task<IActionResult> Login(LoginViewModel model, [FromServices] ILoginUserServices loginService)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -57,7 +57,7 @@ namespace MyPasswords.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, [FromServices] IRegisterServices registerService)
+        public async Task<IActionResult> Register(RegisterViewModel model, [FromServices] IRegisterUserServices registerService)
         {
             if (!ModelState.IsValid) return View(model);
             var isRegistered = await registerService.Register(model);
@@ -83,7 +83,7 @@ namespace MyPasswords.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(UserEditViewModel model, [FromServices] IUpdateServices updateServices)
+        public async Task<IActionResult> Update(UserEditViewModel model, [FromServices] IUpdateUserServices updateServices)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -103,7 +103,7 @@ namespace MyPasswords.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete([FromServices] IDeleteService deleteService)
+        public async Task<IActionResult> Delete([FromServices] IDeleteUserServices deleteService)
         {
             var isDeleted = await deleteService.Delete();
             if (!isDeleted)

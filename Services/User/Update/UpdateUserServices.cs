@@ -5,12 +5,12 @@ using MyPasswords.Services.ObtainUserLogged;
 
 namespace MyPasswords.Services.User.Update
 {
-    public class UpdateServices : IUpdateServices
+    public class UpdateUserServices : IUpdateUserServices
     {
         private readonly IUserRepository _userRepository;
         private readonly ILoggedUser _loggedUser;
 
-        public UpdateServices(IUserRepository userRepository, ILoggedUser loggedUser)
+        public UpdateUserServices(IUserRepository userRepository, ILoggedUser loggedUser)
         {
             _userRepository = userRepository;
             _loggedUser = loggedUser;

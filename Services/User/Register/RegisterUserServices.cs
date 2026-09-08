@@ -6,12 +6,12 @@ using MyPasswords.Security;
 
 namespace MyPasswords.Services.User.Register
 {
-    public class RegisterService : IRegisterServices
+    public class RegisterUserServices : IRegisterUserServices
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public RegisterService(IUserRepository userRepository, IMapper mapper)
+        public RegisterUserServices(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;

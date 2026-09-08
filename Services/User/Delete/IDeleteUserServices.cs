@@ -1,6 +1,6 @@
 ﻿namespace MyPasswords.Services.User.Delete
 {
-    public interface IDeleteService
+    public interface IDeleteUserServices
     {
         Task<bool> Delete();
     }

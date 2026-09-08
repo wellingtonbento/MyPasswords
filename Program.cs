@@ -29,10 +29,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-builder.Services.AddScoped<ILoginService, LoginService>();
-builder.Services.AddScoped<IRegisterServices, RegisterService>();
-builder.Services.AddScoped<IUpdateServices, UpdateServices>();
-builder.Services.AddScoped<IDeleteService, DeleteService>();
+builder.Services.AddScoped<ILoginUserServices, LoginUserServices>();
+builder.Services.AddScoped<IRegisterUserServices, RegisterUserServices>();
+builder.Services.AddScoped<IUpdateUserServices, UpdateUserServices>();
+builder.Services.AddScoped<IDeleteUserServices, DeleteUserServices>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();

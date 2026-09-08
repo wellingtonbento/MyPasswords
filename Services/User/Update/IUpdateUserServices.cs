@@ -2,7 +2,7 @@
 
 namespace MyPasswords.Services.User.Update
 {
-    public interface IUpdateServices
+    public interface IUpdateUserServices
     {
         public Task<bool> Update(UserEditViewModel model);
     }

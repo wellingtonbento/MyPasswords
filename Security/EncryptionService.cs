@@ -8,7 +8,7 @@ namespace MyPasswords.Security
         private readonly byte[] _key;
         public EncryptionService(IConfiguration configuration)
         {
-            string keyString = configuration["EncryptionKey"];
+            string keyString = configuration["EncryptionKey"]!;
             _key = Encoding.UTF8.GetBytes(keyString);
         }
 
