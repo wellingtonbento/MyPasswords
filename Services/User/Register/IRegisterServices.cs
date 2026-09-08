@@ -1,6 +1,6 @@
 ﻿using MyPasswords.Models;
 
-namespace MyPasswords.Services.Register
+namespace MyPasswords.Services.User.Register
 {
     public interface IRegisterServices
     {

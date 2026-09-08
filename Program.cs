@@ -4,9 +4,10 @@ using MyPasswords.Data;
 using MyPasswords.Handlers;
 using MyPasswords.Repositories;
 using MyPasswords.Repositories.Interfaces;
-using MyPasswords.Security;
-using MyPasswords.Services.Account;
-using MyPasswords.Services.Register;
+using MyPasswords.Services.ObtainUserLogged;
+using MyPasswords.Services.User.Login;
+using MyPasswords.Services.User.Register;
+using MyPasswords.Services.User.Update;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,10 +30,13 @@ builder.Services.AddProblemDetails();
 
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IRegisterServices, RegisterService>();
+builder.Services.AddScoped<IUpdateServices, UpdateServices>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
 builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();
+
+builder.Services.AddScoped<ILoggedUser, LoggedUser>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

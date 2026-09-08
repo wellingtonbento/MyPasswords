@@ -1,7 +1,7 @@
 ﻿using MyPasswords.DTOs;
 using MyPasswords.Models;
 
-namespace MyPasswords.Services.Account
+namespace MyPasswords.Services.User.Login
 {
     public interface ILoginService
     {

@@ -3,7 +3,7 @@ using MyPasswords.Models;
 using MyPasswords.Repositories.Interfaces;
 using MyPasswords.Security;
 
-namespace MyPasswords.Services.Account
+namespace MyPasswords.Services.User.Login
 {
     public class LoginService : ILoginService
     {
@@ -25,7 +25,7 @@ namespace MyPasswords.Services.Account
             return new LoginDTO
             {
                 Id = user.Id,
-                UserName = user.Name,
+                Name = user.Name,
                 Email = user.Email
             };
         }
