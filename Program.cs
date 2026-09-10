@@ -4,6 +4,8 @@ using MyPasswords.Data;
 using MyPasswords.Handlers;
 using MyPasswords.Repositories;
 using MyPasswords.Repositories.Interfaces;
+using MyPasswords.Security;
+using MyPasswords.Security.Interfaces;
 using MyPasswords.Services.ObtainUserLogged;
 using MyPasswords.Services.User.Delete;
 using MyPasswords.Services.User.Login;
@@ -36,6 +38,9 @@ builder.Services.AddScoped<IDeleteUserServices, DeleteUserServices>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();
+
+builder.Services.AddScoped<IPasswordHashService, PasswordHashService>();
+builder.Services.AddScoped<IEncryptionService, EncryptionService>();
 
 builder.Services.AddScoped<ILoggedUser, LoggedUser>();
 builder.Services.AddHttpContextAccessor();
