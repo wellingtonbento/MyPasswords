@@ -1,8 +1,10 @@
-﻿namespace MyPasswords.Security
+﻿using MyPasswords.Security.Interfaces;
+
+namespace MyPasswords.Security
 {
-    public static class PasswordHashService
+    public class PasswordHashService : IPasswordHashService
     {
-        public static string HashPassword(string password) => BCrypt.Net.BCrypt.HashPassword(password);
-        public static bool VerifyPassword(string password, string hash) => BCrypt.Net.BCrypt.Verify(password, hash);
+        public string HashPassword(string password) => BCrypt.Net.BCrypt.HashPassword(password);
+        public bool VerifyPassword(string password, string hash) => BCrypt.Net.BCrypt.Verify(password, hash);
     }
 }

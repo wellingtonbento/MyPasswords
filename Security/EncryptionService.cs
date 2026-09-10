@@ -1,9 +1,10 @@
-﻿using System.Security.Cryptography;
+﻿using MyPasswords.Security.Interfaces;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MyPasswords.Security
 {
-    public class EncryptionService
+    public class EncryptionService : IEncryptionService
     {
         private readonly byte[] _key;
         public EncryptionService(IConfiguration configuration)
