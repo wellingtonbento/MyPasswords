@@ -6,6 +6,7 @@ using MyPasswords.Repositories;
 using MyPasswords.Repositories.Interfaces;
 using MyPasswords.Security;
 using MyPasswords.Security.Interfaces;
+using MyPasswords.Services.Credential.Register;
 using MyPasswords.Services.ObtainUserLogged;
 using MyPasswords.Services.User.Delete;
 using MyPasswords.Services.User.Login;
@@ -35,6 +36,8 @@ builder.Services.AddScoped<ILoginUserServices, LoginUserServices>();
 builder.Services.AddScoped<IRegisterUserServices, RegisterUserServices>();
 builder.Services.AddScoped<IUpdateUserServices, UpdateUserServices>();
 builder.Services.AddScoped<IDeleteUserServices, DeleteUserServices>();
+
+builder.Services.AddScoped<IRegisterCredentialServices, RegisterCredentialServices>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICredentialRepository, CredentialRepository>();

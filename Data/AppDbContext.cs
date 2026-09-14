@@ -29,7 +29,7 @@ namespace MyPasswords.Data
             {
                 entity.HasKey(c => c.Id);
                 entity.Property(c => c.ServiceName).IsRequired().HasColumnType("varchar(50)");
-                entity.Property(c => c.UserName).IsRequired().HasColumnType("varchar(100)");
+                entity.Property(c => c.UserName).IsRequired().HasColumnType("varchar(255)");
                 entity.Property(c => c.Password).IsRequired().HasColumnType("varchar(255)");
                 entity.Property(c => c.CreatedAt);
 
