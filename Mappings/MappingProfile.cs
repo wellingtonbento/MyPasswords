@@ -9,6 +9,12 @@ namespace MyPasswords.Mappings
         public MappingProfile()
         {
             CreateMap<RegisterViewModel, User>();
+
+            CreateMap<RegisterCredentialViewModel, Credential>()
+                .ForMember(dest => dest.UserId, opt => opt.Ignore())
+                .ForMember(dest => dest.UserName, opt => opt.Ignore())
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
+
         }
     }
 }
